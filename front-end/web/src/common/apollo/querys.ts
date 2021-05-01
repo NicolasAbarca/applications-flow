@@ -15,3 +15,14 @@ query ApplicationDetail($id: ID!) {
   }
 }
 `
+
+export const GET_APPLICATIONS = gql`
+  query {
+    applications {
+      id
+      title
+      excerpt
+      state
+    }
+  }
+`

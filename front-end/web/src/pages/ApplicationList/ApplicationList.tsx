@@ -1,18 +1,9 @@
 import React, { FC } from 'react'
 import { gql, useQuery } from '@apollo/client'
-import List from './components/List'
 import { Container } from 'semantic-ui-react'
 
-const GET_APPLICATIONS = gql`
-  query {
-    applications {
-      id
-      title
-      excerpt
-      state
-    }
-  }
-`
+import List from './components/List'
+import { GET_APPLICATIONS } from '../../common/apollo/querys'
 
 type ApplicationType = {
   id: string
