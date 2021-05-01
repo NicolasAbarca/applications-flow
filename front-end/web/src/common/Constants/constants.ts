@@ -8,3 +8,12 @@ export const STATES_DISPLAY_NAME = {
     accepted: 'Accepted',
     rejected: 'Rejected',
   } as const;
+
+  export const APOLLO_STATES = {
+    DRAFT: 'draft',
+    PUBLISHED: 'published',
+    IN_REVIEW: 'inReview',
+    REVIEWED: 'reviewed',
+    ACCEPTED: 'accepted',
+    REJECTED: 'rejected',
+  } as const;
