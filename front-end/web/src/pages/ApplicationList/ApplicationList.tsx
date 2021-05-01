@@ -1,6 +1,7 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import { gql, useQuery } from '@apollo/client'
-import { Link } from 'react-router-dom'
+import List from './components/List'
+import { Container } from 'semantic-ui-react'
 
 const GET_APPLICATIONS = gql`
   query {
@@ -8,6 +9,7 @@ const GET_APPLICATIONS = gql`
       id
       title
       excerpt
+      state
     }
   }
 `
@@ -16,6 +18,7 @@ type ApplicationType = {
   id: string
   title: string
   excerpt: string
+  state: 'draft' | 'published' | 'inReview' | 'reviewed' | 'accepted' | 'rejected'
 }
 
 type ApplicationListType = {
@@ -26,20 +29,12 @@ const ApplicationList: FC = () => {
   const { loading, data, error } = useQuery<ApplicationListType>(GET_APPLICATIONS)
   if (loading) return <div>Loading...</div>
   if (error) return <div>Error: {error.message}</div>
-  if (!data) return <div> Where's the data?</div>
+  if (!data) return <div> Where is the data?</div>
 
   return (
-    <div>
-      <ul>
-        {data.applications.map((application: ApplicationType) => {
-          return (
-            <li key={application.id}>
-              <Link to={`/applications/${application.id}`}>{application.title}</Link>
-            </li>
-          )
-        })}
-      </ul>
-    </div>
+    <Container style={{ marginTop: '7em' }}>
+      <List options={data.applications}/>
+    </Container>
   )
 }
 

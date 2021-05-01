@@ -1,33 +1,22 @@
-import { FC } from 'react'
+import React, { FC } from 'react'
 import { ApolloProvider } from '@apollo/client'
+import { ToastContainer } from 'react-toastify';
+
 import client from './apollo/client'
-import ApplicationList from './pages/ApplicationList/ApplicationList'
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom'
-import Home from './pages/Home/Home'
-import ApplicationDetail from './pages/ApplicationDetail/ApplicationDetail'
+import { BrowserRouter as Router } from 'react-router-dom'
+import { SwitchView, Menu } from './components/Menu'
 
 const App: FC = () => {
   return (
     <ApolloProvider client={client}>
       <Router>
-        <div>
-          <nav>
-            <ul>
-              <li>
-                <Link to="/">Home</Link>
-              </li>
-              <li>
-                <Link to="/applications">Applications</Link>
-              </li>
-            </ul>
-          </nav>
-          <Switch>
-            <Route path="/applications/:id/:action?" component={ApplicationDetail} />
-            <Route path="/applications" component={ApplicationList} />
-            <Route path="/" component={Home} />
-          </Switch>
-        </div>
+          <Menu/>
+          <SwitchView />
       </Router>
+      <ToastContainer
+        position="bottom-left"
+        autoClose={2000}
+      />
     </ApolloProvider>
   )
 }
