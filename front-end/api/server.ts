@@ -9,6 +9,7 @@ async function main() {
   await getConnection();
   const schema = await buildSchema({
     resolvers: [ApplicationResolver, ReviewResolver],
+    validate: false
   });
   const server = new ApolloServer({ schema });
   await server.listen(4000);

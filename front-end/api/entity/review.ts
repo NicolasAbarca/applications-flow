@@ -29,7 +29,8 @@ export class ReviewResolver {
     @Arg('input', () => CreateReviewInput) input: CreateReviewInput
   ): Promise<Application> {
     const application = await Application.findOneOrFail(input.applicationId)
-    if (['published', 'inReview'].includes(application.state))
+    if (['draft'].includes(application.state))
+    
       throw new Error('Application not in a reviewable state')
 
     const review = await Review.create({ application, ...input }).save()
